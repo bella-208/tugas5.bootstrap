@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>FurniNest | Home Furniture & Smart Planning + Shop Cart</title>
+    <!-- Google Fonts & Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="tugas5.css">
+</head>
+<body>
+
+<div class="overlay" id="cartOverlay"></div>
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h3><i class="fas fa-shopping-bag"></i> Keranjang Belanja</h3>
+        <button class="close-cart" id="closeCartBtn">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItemsContainer">
+        <div class="empty-cart">Keranjang masih kosong 🌿</div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+        <div class="cart-total">
+            <span>Total</span>
+            <span id="cartTotalPrice">Rp 0</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn"><i class="fas fa-credit-card"></i> Checkout Sekarang</button>
+    </div>
+</div>
+
+<div class="container">
+    <nav class="navbar">
+        <div class="logo">Furni<span>Nest</span></div>
+        <ul class="nav-links">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#koleksi">Koleksi</a></li>
+            <li><a href="#plan">Smart Plan</a></li>
+            <li><a href="#testi">Testimoni</a></li>
+            <li><div class="cart-icon" id="cartIcon"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></div></li>
+        </ul>
+    </nav>
+
+    <div id="beranda" class="hero">
+        <div class="hero-text">
+            <h1>Rumah Hangat, <br>Sentuhan <span style="color:#b87b4b;">Furniture Elegan</span></h1>
+            <p>Desain kontemporer, material ramah lingkungan, dan kenyamanan premium. Temukan furniture impian.</p>
+            <div>
+                <a href="#koleksi" class="btn">Lihat Koleksi</a>
+                <a href="#plan" class="btn btn-outline">✨ Coba Smart Plan</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="living room.jpeg" alt="FurniNest Hero">
+        </div>
+    </div>
+
+    <!-- KOLEKSI dengan tombol beli dan card shop -->
+    <div id="koleksi">
+        <h2 class="section-title">Koleksi Signature</h2>
+        <div class="products-grid" id="productsGrid">
+            <!-- product data akan di-generate via JS agar mudah integrasi cart -->
+        </div>
+    </div>
+
+    <!-- PLAN SECTION CANGGIH -->
+    <div id="plan" class="plan-section">
+        <div class="plan-header">
+            <h2>⚡ Smart Room Planner ⚡</h2>
+            <p>Teknologi canggih: Layout interaktif, AI rekomendasi, dan AR preview.</p>
+        </div>
+        <div class="canggih-grid">
+            <div class="plan-card"><i class="fas fa-cube"></i><h3>3D Virtual Planner</h3><button class="simulate-btn" id="scrollToPlannerBtn">🎯 Buka Planner</button></div>
+            <div class="plan-card"><i class="fas fa-robot"></i><h3>AI Layout Generator</h3><button class="simulate-btn" id="aiSuggestionBtn">🤖 Generate AI</button></div>
+            <div class="plan-card"><i class="fas fa-vr-cardboard"></i><h3>AR Preview (Beta)</h3><button class="simulate-btn" id="arDemoBtn">📱 Coba AR</button></div>
+        </div>
+        <div class="room-planner-preview" id="plannerCanvasSection">
+            <h3 style="font-size:28px; text-align:center;">🎨 Smart Layout Studio</h3>
+            <div class="planner-demo">
+                <canvas id="roomCanvas" width="560" height="420"></canvas>
+                <div class="interact-controls">
+                    <h4>Pilih Furniture</h4>
+                    <div class="furniture-btns" id="furnitureSelector">
+                        <button data-type="sofa" class="active">🛋️ Sofa</button>
+                        <button data-type="table">🪑 Meja</button>
+                        <button data-type="shelf">📚 Rak</button>
+                    </div>
+                    <button id="resetPlanBtn" class="simulate-btn">Reset Denah</button>
+                    <div class="ai-tip" id="aiTipDisplay">💡 AI Advisor: Posisikan sofa menghadap jendela.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="testi">
+        <h2 class="section-title">Kepercayaan Pelanggan</h2>
+        <div class="testimonials">
+            <div class="testi-card"><i class="fas fa-star"></i><p>"Furnitur berkualitas dan smart planner luar biasa!"</p><strong>- Amanda</strong></div>
+            <div class="testi-card"><i class="fas fa-star"></i><p>“AI Layout sangat membantu menata ruangan.”</p><strong>- Bima</strong></div>
+            <div class="testi-card"><i class="fas fa-star"></i><p>“Pengiriman sangat cepat barang sesuai dengan yang digambar”</p><strong>- Citra</strong></div>
+        </div>
+    </div>
+</div>
+<footer><div class="container footer-grid" style="display:flex; justify-content:space-between;"><div><h3>FurniNest</h3><p>Smart Furniture & Innovation</p></div><div><h4>Kontak</h4><p>hello@furninest.com</p></div><div><i class="fab fa-instagram"></i> <i class="fab fa-facebook"></i></div></div><div style="text-align:center; margin-top:32px;">&copy; 2025 FurniNest — Belanja Furniture & Smart Plan</div></footer>
+
+<script>
+    // ----- DATA PRODUK -----
+    const products = [
+        { id: 1, name: "Sofa Beludru Jade", price: 4850000, image: "sofa.jpeg", icon: "🛋️" },
+        { id: 2, name: "Meja Makan Ekstensi", price: 3200000, image: "kursi.jpeg", icon: "🪑" },
+        { id: 3, name: "Rak Buku Susun", price: 1890000, image: "rak buku.jpeg", icon: "📚" },
+        { id: 4, name: "Kursi Santai Oak", price: 1450000, image: "kursi oak.jpeg", icon: "💺" }
+    ];
+
+    // CART STATE
+    let cart = []; // { id, name, price, quantity }
+
+    // DOM elements
+    const productsGrid = document.getElementById('productsGrid');
+    const cartSidebar = document.getElementById('cartSidebar');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const cartIcon = document.getElementById('cartIcon');
+    const closeCartBtn = document.getElementById('closeCartBtn');
+    const cartItemsContainer = document.getElementById('cartItemsContainer');
+    const cartFooter = document.getElementById('cartFooter');
+    const cartTotalPriceSpan = document.getElementById('cartTotalPrice');
+    const cartCountSpan = document.getElementById('cartCount');
+
+    // Render produk ke grid
+    function renderProducts() {
+        productsGrid.innerHTML = '';
+        products.forEach(prod => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <img src="${prod.image}" alt="${prod.name}">
+                <h3>${prod.name}</h3>
+                <div class="price">Rp ${prod.price.toLocaleString('id-ID')}</div>
+                <button class="buy-btn" data-id="${prod.id}"><i class="fas fa-shopping-cart"></i> Beli Sekarang</button>
+            `;
+            productsGrid.appendChild(card);
+        });
+        // event listener untuk tombol beli
+        document.querySelectorAll('.buy-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(btn.dataset.id);
+                const product = products.find(p => p.id === id);
+                addToCart(product);
+            });
+        });
+    }
+
+    // Add to cart
+    function addToCart(product) {
+        const existing = cart.find(item => item.id === product.id);
+        if(existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
+        updateCartUI();
+        openCartSidebar();
+        showNotification(`${product.name} ditambahkan ke keranjang!`);
+    }
+
+    // Update cart tampilan & total
+    function updateCartUI() {
+        cartCountSpan.innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+        if(cart.length === 0) {
+            cartItemsContainer.innerHTML = '<div class="empty-cart">Keranjang masih kosong 🌿</div>';
+            cartFooter.style.display = 'none';
+            return;
+        }
+        cartFooter.style.display = 'block';
+        let itemsHtml = '';
+        let total = 0;
+        cart.forEach(item => {
+            const subtotal = item.price * item.quantity;
+            total += subtotal;
+            itemsHtml += `
+                <div class="cart-item">
+                    <div class="cart-item-img">${item.icon || '🪑'}</div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">Rp ${item.price.toLocaleString('id-ID')}</div>
+                        <div>Qty: ${item.quantity}</div>
+                    </div>
+                    <button class="cart-item-remove" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            `;
+        });
+        cartItemsContainer.innerHTML = itemsHtml;
+        cartTotalPriceSpan.innerText = `Rp ${total.toLocaleString('id-ID')}`;
+        // remove handler
+        document.querySelectorAll('.cart-item-remove').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(btn.dataset.id);
+                removeFromCart(id);
+            });
+        });
+    }
+
+    function removeFromCart(id) {
+        const index = cart.findIndex(i => i.id === id);
+        if(index !== -1) {
+            if(cart[index].quantity > 1) cart[index].quantity -= 1;
+            else cart.splice(index, 1);
+        }
+        updateCartUI();
+        if(cart.length === 0) closeCartSidebar();
+    }
+
+    function openCartSidebar() {
+        cartSidebar.classList.add('open');
+        cartOverlay.classList.add('active');
+    }
+    function closeCartSidebar() {
+        cartSidebar.classList.remove('open');
+        cartOverlay.classList.remove('active');
+    }
+    function showNotification(msg) {
+        // notif simpel
+        const notif = document.createElement('div');
+        notif.innerText = msg;
+        notif.style.position = 'fixed';
+        notif.style.bottom = '20px';
+        notif.style.left = '20px';
+        notif.style.background = '#b87b4b';
+        notif.style.color = 'white';
+        notif.style.padding = '12px 24px';
+        notif.style.borderRadius = '40px';
+        notif.style.zIndex = '1100';
+        notif.style.fontWeight = 'bold';
+        document.body.appendChild(notif);
+        setTimeout(() => notif.remove(), 2000);
+    }
+
+    // Checkout & link pembelian (simulasi pembayaran)
+    document.getElementById('checkoutBtn')?.addEventListener('click', () => {
+        if(cart.length === 0) {
+            alert("Keranjang belanja kosong! Silakan tambahkan produk.");
+            return;
+        }
+        const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+        alert(`✅ Terima kasih telah berbelanja di FurniNest!\nTotal pembelian: Rp ${total.toLocaleString('id-ID')}\nPesanan Anda akan diproses. Link pembelian akan dikirim ke email. (Demo checkout)`);
+        // clear cart setelah sukses (opsi)
+        cart = [];
+        updateCartUI();
+        closeCartSidebar();
+        showNotification("Pesanan berhasil, cek email untuk konfirmasi pembayaran.");
+    });
+
+    cartIcon.addEventListener('click', openCartSidebar);
+    closeCartBtn.addEventListener('click', closeCartSidebar);
+    cartOverlay.addEventListener('click', closeCartSidebar);
+
+    // ----- CANVAS PLANNER (canggih tetap ada) -----
+    const canvas = document.getElementById('roomCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 560; canvas.height = 420;
+    let furnitures = [
+        { type: 'sofa', x: 140, y: 300, width: 85, height: 48 },
+        { type: 'table', x: 290, y: 220, width: 70, height: 70 }
+    ];
+    let selectedFurnitureType = 'sofa';
+    function drawRoom() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#faf1e6'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = "#e0cfbe"; ctx.lineWidth = 0.7;
+        for(let i=0;i<canvas.width;i+=35){ ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i,canvas.height); ctx.stroke(); ctx.moveTo(0,i); ctx.lineTo(canvas.width,i); ctx.stroke(); }
+        ctx.fillStyle = "#c8aa81"; ctx.fillRect(35,15,60,14); ctx.fillStyle="#684e33"; ctx.fillText("🚪 Pintu",40,28);
+        ctx.fillStyle="#add8e6"; ctx.fillRect(450,30,70,45); ctx.fillText("Jendela",468,62);
+        furnitures.forEach(f => {
+            ctx.shadowBlur = 3;
+            if(f.type === 'sofa'){ ctx.fillStyle="#c39a6b"; ctx.fillRect(f.x,f.y,f.width,f.height); ctx.font="28px Segoe UI"; ctx.fillText("🛋️", f.x+f.width/2-15, f.y+f.height/2+8); }
+            else if(f.type === 'table'){ ctx.fillStyle="#b58454"; ctx.fillRect(f.x,f.y,f.width,f.height); ctx.fillText("🪑", f.x+f.width/2-15, f.y+f.height/2+8); }
+            else if(f.type === 'shelf'){ ctx.fillStyle="#be946e"; ctx.fillRect(f.x,f.y,f.width,f.height); ctx.fillText("📚", f.x+f.width/2-12, f.y+f.height/2+6); }
+        });
+    }
+    canvas.addEventListener('click', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width/rect.width, scaleY = canvas.height/rect.height;
+        let mx = (e.clientX - rect.left)*scaleX, my = (e.clientY - rect.top)*scaleY;
+        let w=85,h=48; if(selectedFurnitureType==='table'){w=70;h=70;} if(selectedFurnitureType==='shelf'){w=65;h=72;}
+        let newX = Math.min(Math.max(mx-w/2,10), canvas.width-w-10);
+        let newY = Math.min(Math.max(my-h/2,50), canvas.height-h-10);
+        furnitures.push({ type: selectedFurnitureType, x: newX, y: newY, width: w, height: h });
+        drawRoom();
+    });
+    document.getElementById('resetPlanBtn')?.addEventListener('click',()=>{ furnitures = [{ type:'sofa',x:140,y:300,width:85,height:48},{ type:'table',x:290,y:220,width:70,height:70}]; drawRoom(); });
+    document.querySelectorAll('#furnitureSelector button').forEach(btn=>{ btn.addEventListener('click',()=>{ document.querySelectorAll('#furnitureSelector button').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); selectedFurnitureType=btn.dataset.type; }); });
+    document.getElementById('aiSuggestionBtn')?.addEventListener('click',()=>{ furnitures = [{ type:'sofa',x:70,y:290,width:95,height:50},{ type:'table',x:240,y:200,width:80,height:80},{ type:'shelf',x:430,y:310,width:70,height:75}]; drawRoom(); document.getElementById('aiTipDisplay').innerHTML = "🤖 AI Rekomendasi: Tata letak ergonomis dengan sofa utama menghadap pintu."; });
+    document.getElementById('arDemoBtn')?.addEventListener('click',()=>{ alert("🔮 AR Preview: FurniNest siap menghadirkan furniture 3D di ruangan Anda via kamera. Demo interaktif!"); document.getElementById('aiTipDisplay').innerHTML = "📱 AR Mode Aktif: Lihat sofa & meja di rumah Anda."; });
+    document.getElementById('scrollToPlannerBtn')?.addEventListener('click',()=>{ document.getElementById('plannerCanvasSection').scrollIntoView({behavior:'smooth'}); });
+    drawRoom();
+
+    renderProducts();
+    updateCartUI();
+</script>
+</body>
+</html>
